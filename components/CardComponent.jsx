@@ -8,7 +8,7 @@ const CardComponent = ({ project }) => {
 
     return (
         // ✅ Use `_id` instead of `id`
-        <Link href={`/projects/${project.project.toLowerCase()}/${project._id}`} passHref>
+        <Link href={`/projects/${project.project.toLowerCase()}/${project.id}`} passHref>
             <div className="card" aria-label={`View details for ${project.title}`}>
 
                 {/* Project Details */}

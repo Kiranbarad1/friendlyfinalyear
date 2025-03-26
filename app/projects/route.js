@@ -1,51 +1,34 @@
-import connectDB from "@/lib/mongodb";
-import Project from "@/models/Project";
 import { NextResponse } from "next/server";
-import { Types } from "mongoose"; // Import for ObjectId conversion
+
+// Hardcoded projects array
+const projects = [
+    { id: 1, project: 'node js', title: 'AI Chatbot', description: 'An intelligent chatbot using NLP.', technologies: ['React', 'Node.js', 'AI'], imageUrl: "/globe.svg", videoUrl: "https://www.youtube.com/embed/D_qjmHvD8m8?si=QHSiZcidjb5NSZeM?autoplay=1&mute=1", shortDescription: 'A digital solution for library book tracking.' },
+    { id: 2, project: 'php', title: 'E-Commerce Website', description: 'An online shopping platform.', technologies: ['PHP', 'MySQL', 'Bootstrap'], imageUrl: "/globe.svg", videoUrl: "https://www.youtube.com/embed/D_qjmHvD8m8?si=QHSiZcidjb5NSZeM?autoplay=1&mute=1", shortDescription: 'A digital solution for library book tracking.' },
+    // ... (other projects)
+];
 
 // 🚀 Fetch all projects (GET)
 export async function GET() {
-    try {
-        await connectDB();
-        const projects = await Project.find();
-        return NextResponse.json(projects, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ message: "Server Error", error: error.message }, { status: 500 });
-    }
+    return NextResponse.json(projects, { status: 200 });
 }
 
 // 🚀 Add a new project (POST)
 export async function POST(req) {
-    try {
-        await connectDB();
-        const data = await req.json();
-        const newProject = new Project(data);
-        await newProject.save();
-        return NextResponse.json({ message: "Project added successfully", project: newProject }, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ message: "Server Error", error: error.message }, { status: 500 });
-    }
+    const data = await req.json();
+    const newProject = { id: projects.length + 1, ...data }; // Assign a new ID
+    projects.push(newProject);
+    return NextResponse.json({ message: "Project added successfully", project: newProject }, { status: 201 });
 }
 
-// 🚀 Delete a project by _id (DELETE)
+// 🚀 Delete a project by id (DELETE)
 export async function DELETE(req) {
-    try {
-        await connectDB();
-        const { id } = await req.json();
+    const { id } = await req.json();
+    const index = projects.findIndex(project => project.id === id);
 
-        // Validate ObjectId before deletion
-        if (!Types.ObjectId.isValid(id)) {
-            return NextResponse.json({ message: "Invalid Project ID" }, { status: 400 });
-        }
-
-        const deletedProject = await Project.findByIdAndDelete(new Types.ObjectId(_id));
-
-        if (!deletedProject) {
-            return NextResponse.json({ message: "Project not found" }, { status: 404 });
-        }
-
-        return NextResponse.json({ message: "Project deleted successfully" }, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ message: "Server Error", error: error.message }, { status: 500 });
+    if (index === -1) {
+        return NextResponse.json({ message: "Project not found" }, { status: 404 });
     }
+
+    projects.splice(index, 1);
+    return NextResponse.json({ message: "Project deleted successfully" }, { status: 200 });
 }

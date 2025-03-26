@@ -46,7 +46,7 @@ export default function CategoryPage({ projects, category }) {
                 ) : (
                     <div className="projects-grid">
                         {projects.map(project => (
-                            <CardComponent key={project._id} project={project} />
+                            <CardComponent key={project.id} project={project} />
                         ))}
                     </div>
                 )}
