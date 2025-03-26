@@ -12,7 +12,8 @@ export async function getStaticPaths() {
 
         const projects = await res.json();
         const paths = projects.map(proj => ({
-            params: { category: proj.project.toLowerCase(), id: proj.id.toString() }, // ✅ Use _id instead of id
+            params: { category: proj.project.toLowerCase(), id: proj._id.toString() }, // ✅ Use _id instead of id
+
         }));
 
         return { paths, fallback: "blocking" };
@@ -28,7 +29,8 @@ export async function getStaticProps({ params }) {
         if (!res.ok) throw new Error("Failed to fetch project data");
 
         const projects = await res.json();
-        const project = projects.find(p => p.id.toString() === params.id); // ✅ Use _id instead of id
+        const project = projects.find(p => p._id.toString() === params.id); // ✅ Use _id instead of id
+
 
         if (!project) {
             return { notFound: true };
