@@ -1,6 +1,6 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import SEO from "@/components/SEO";
-import Link from "next/link";
 import CardComponent from "@/components/CardComponent";
 import Navbar from "@/components/Navbar";
 

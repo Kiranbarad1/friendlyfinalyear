@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import CardComponent from '@/components/CardComponent';
-import dotenv from 'dotenv';
 import SEO from '@/components/SEO';
 import "@/pages/projects/CategoryPage.css"; // Use CSS Modules for scoped styling
 
@@ -12,7 +11,7 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
     try {
-        const res = await fetch(`http://localhost:3000/api/projects`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`);
         if (!res.ok) throw new Error("Failed to fetch projects");
 
         const projects = await res.json();

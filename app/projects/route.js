@@ -38,7 +38,7 @@ export async function DELETE(req) {
             return NextResponse.json({ message: "Invalid Project ID" }, { status: 400 });
         }
 
-        const deletedProject = await Project.findByIdAndDelete(new Types.ObjectId(id));
+        const deletedProject = await Project.findByIdAndDelete(new Types.ObjectId(_id));
 
         if (!deletedProject) {
             return NextResponse.json({ message: "Project not found" }, { status: 404 });
