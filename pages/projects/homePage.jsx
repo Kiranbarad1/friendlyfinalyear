@@ -67,7 +67,7 @@ export default function HomePage() {
                             transition={{ duration: 0.6, delay: project.id * 0.2, ease: "easeOut" }}
                             className="bg-gray-800 p-4 rounded-lg shadow-xl transform transition duration-300 ease-in-out hover:shadow-2xl relative"
                         >
-                            <Link href={`http://localhost:3000/projects/node%20js/${project.id}`} passHref>
+                            <Link href={`http://localhost:3000/projects/node%20js/${project._id}`} passHref>
                                 {/* Image */}
                                 <div className="relative w-[350px] h-[188px] overflow-hidden">
                                     <Image

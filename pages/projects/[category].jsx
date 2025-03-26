@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
 import Navbar from '@/components/Navbar';
 import CardComponent from '@/components/CardComponent';
+import dotenv from 'dotenv';
 import SEO from '@/components/SEO';
 import "@/pages/projects/CategoryPage.css"; // Use CSS Modules for scoped styling
 
 export async function getStaticPaths() {
     const categories = ['node js', 'php', 'python', 'java', 'react'];
     const paths = categories.map(category => ({ params: { category } }));
-    return { paths, fallback: "blocking" }; // Use blocking for better user experience
+    return { paths, fallback: 'blocking' };
 }
-
 export async function getStaticProps({ params }) {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`);
+        const res = await fetch(`http://localhost:3000/api/projects`);
         if (!res.ok) throw new Error("Failed to fetch projects");
 
         const projects = await res.json();
@@ -24,7 +24,6 @@ export async function getStaticProps({ params }) {
         console.error("Error fetching projects:", error);
         return { props: { projects: [], category: params.category } };
     }
-
 }
 
 export default function CategoryPage({ projects, category }) {
