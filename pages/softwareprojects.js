@@ -40,7 +40,7 @@ export default function SoftwareProjects() {
             <div>
                 {projects.map((project) => (
 
-                    <CardComponent project={project} />
+                    <CardComponent key={project._id} project={project} />
                 ))}
             </div>
         </div>
