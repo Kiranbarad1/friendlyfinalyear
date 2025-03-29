@@ -1,73 +1,106 @@
-/* Remove Underlines from Links */
-a {
-    text-decoration: none;
-}
-
-/* Card Styles */
+/* General Card Styling */
 .card {
-    width: 250px;
-    height: 200px;
-    background: #fff;
     border: 2px solid #000;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
+    /* Black border */
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    background: white;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* Hover Effect */
+/* Hover effect */
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Header */
-.card-header {
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.card-title {
-    font-size: 1.5rem;
+/* Price Badge (Golden) */
+.card-price {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     font-weight: bold;
+    font-size: 14px;
+    color: black;
+    background: #FFD700;
+    /* Golden badge */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Project Title */
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
     color: #000;
-    text-transform: capitalize;
-    text-decoration: none;
-    /* Remove underline */
+    /* Black */
 }
 
-/* Description */
+/* Remove underline & keep clickable */
+.card-title a {
+    text-decoration: none;
+    color: #000;
+    /* Black */
+    font-weight: bold;
+}
+
+/* Project Short Description */
 .card-description {
-    font-size: 1rem;
+    font-size: 14px;
     color: #333;
-    text-align: center;
-    margin-bottom: 1rem;
-    text-decoration: none;
-    /* Remove underline */
+    /* Darker gray */
+    margin-bottom: 10px;
 }
 
-/* Tech Stack Badges */
+/* Technology List */
 .card-tech {
+    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 8px;
+}
+
+/* Tech Badge Style */
+.tech-badge {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive Grid Layout */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
     justify-content: center;
 }
 
-.tech-badge {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    color: #000;
-    font-weight: 500;
-    border: 1px solid #000;
-    transition: background 0.3s ease-in-out;
-    text-decoration: none;
-    /* Remove underline */
+/* Remove underline from all text */
+.card-title,
+.description,
+.tech-button {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    /* Removes any bottom border */
 }
 
-.tech-badge:hover {
-    background: rgba(0, 0, 0, 0.2);
+/* Ensure links inside don't have underline */
+a {
+    text-decoration: none !important;
+}
+
+/* Optional: Fix button outline issue */
+.tech-button {
+    outline: none;
+    box-shadow: none;
 }

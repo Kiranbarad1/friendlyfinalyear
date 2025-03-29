@@ -1,31 +1,32 @@
-
 import Link from 'next/link';
 import { useMemo } from 'react';
-import '@/components/CardComponent.css'; // Ensure it's used only if necessary
+import '@/components/CardComponent.css';
 
 const CardComponent = ({ project }) => {
     if (!project) return null;
+
     const techList = useMemo(() => project.technologies || [], [project.technologies]);
 
     return (
         <Link href={`/projects/${project.category?.toLowerCase()}/${project._id}`} passHref>
             <div className="card" aria-label={`View details for ${project.title}`}>
-                {/* Project Details */}
-                <div className="card-header">
-                    <h2 className="card-title">{project.title || 'Untitled Project'}</h2>
-                </div>
+                {/* Price in Top Right */}
+                <div className="card-price">{project.price || 'FREE '}</div>
 
-                <p className="card-description">{project.description || 'No description available.'}</p>
-                <p className="card-description">{project.price || 'No price available.'}</p>
+                {/* Title */}
+                <h2 className="card-title">{project.title || 'Untitled Project'}</h2>
 
-                {/* Technologies */}
+                {/* Short Description */}
+                <p className="card-description">{project.shortDescription || 'No description available.'}</p>
+
+                {/* Technologies List */}
                 <div className="card-tech">
                     {techList.length > 0 ? (
                         techList.map((tech, index) => (
                             <span key={index} className="tech-badge">{tech}</span>
                         ))
                     ) : (
-                        <span className="tech-badge">No technologies listed</span>
+                        <span className="tech-badge">No tech listed</span>
                     )}
                 </div>
             </div>
