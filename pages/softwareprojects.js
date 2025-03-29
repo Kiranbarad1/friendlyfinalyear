@@ -1,42 +1,48 @@
-"use client"
-import React, { useEffect, useState } from "react";
-import SEO from "@/components/SEO";
-import CardComponent from "@/components/CardComponent";
-import Navbar from "@/components/Navbar";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import CardComponent from '@/components/CardComponent';
+import Navbar from '@/components/Navbar';
 
-const SoftwareProjects = () => {
+export default function SoftwareProjects() {
+    const router = useRouter();
+    const { category } = router.query;
     const [projects, setProjects] = useState([]);
 
-    // Fetch projects from API
     useEffect(() => {
-        fetch("/api/projects") // Fetch data from API route
-            .then((res) => res.json())
-            .then((data) => setProjects(data))
-            .catch((error) => console.error("Error fetching projects:", error));
-    }, []);
+        fetch(`/api/projects`)
+            .then(res => res.json())
+            .then(data => {
+                if (category) {
+                    setProjects(data.filter(proj => proj.category.toLowerCase() === category.toLowerCase()));
+                } else {
+                    setProjects(data);
+                }
+            })
+            .catch(err => console.error("Error fetching projects:", err));
+    }, [category]);
+
+    const handleCategoryClick = (selectedCategory) => {
+        router.push(`/softwareprojects?category=${selectedCategory}`);
+    };
 
     return (
-        <>
-            <SEO
-                title={`Major Projects`}
-                description={`Explore the best projects for final year students and developers. Major and mini projects for BTECH, MTECH, BE, MCA, BCA, and BSC students.`}
-                keywords={`BTECH, MTECH, BE, MCA, BCA, BSC projects, major projects, development`}
-            />
+        <div>
             <Navbar />
-            <div className="container mt-[60px] mx-auto p-4">
-                <h1 className="text-3xl font-bold text-center my-6 text-blue-600">Software Projects</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {projects.length === 0 ? (
-                        <p className="text-center text-gray-500 text-xl">Loading projects...</p>
-                    ) : (
-                        projects.map((project) => (
-                            <CardComponent key={project.id} project={project} />
-                        ))
-                    )}
-                </div>
+            <h1>Software Projects</h1>
+            <div>
+                <button onClick={() => router.push('/softwareprojects')}>All</button>
+                {['php', 'java', 'python', 'node js', 'react'].map(cat => (
+                    <button key={cat} onClick={() => handleCategoryClick(cat)}>
+                        {cat.toUpperCase()}
+                    </button>
+                ))}
             </div>
-        </>
-    );
-};
+            <div>
+                {projects.map((project) => (
 
-export default SoftwareProjects;
+                    <CardComponent project={project} />
+                ))}
+            </div>
+        </div>
+    );
+}

@@ -14,7 +14,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className={styles.navbar} style={{ height: "60px" }}>
+        <nav className={styles.navbar} style={{ height: "40px" }}>
             {/* Logo */}
             <div className={styles.logo}>
                 <Link href="/">Projects Hub</Link>
