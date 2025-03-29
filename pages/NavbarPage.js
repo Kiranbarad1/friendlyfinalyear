@@ -3,9 +3,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import styles from "./Navbar.module.css"; // Ensure correct import
+import styles from "./NavbarPage.module.css"; // Ensure correct import
 
-export default function Navbar() {
+export default function NavbarPage() {
     const [isOpen, setIsOpen] = useState(false);
 
     // Toggle Menu with Safe State Update

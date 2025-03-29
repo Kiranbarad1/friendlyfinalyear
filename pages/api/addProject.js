@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     try {
         await connectToDatabase();
 
-        const { title, description, category, technologies, imageUrl, videoUrl, shortDescription } = req.body;
+        const { title, description, category, technologies, imageUrl, videoUrl, shortDescription, price } = req.body;
 
         // console.log("📨 Received Data:", req.body); // ✅ Check Incoming Data
 
@@ -33,7 +33,8 @@ export default async function handler(req, res) {
             technologies,
             imageUrl,
             videoUrl,
-            shortDescription
+            shortDescription,
+            price
         });
 
         await newProject.save();

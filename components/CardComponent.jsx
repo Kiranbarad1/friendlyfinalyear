@@ -16,6 +16,7 @@ const CardComponent = ({ project }) => {
                 </div>
 
                 <p className="card-description">{project.description || 'No description available.'}</p>
+                <p className="card-description">{project.price || 'No price available.'}</p>
 
                 {/* Technologies */}
                 <div className="card-tech">

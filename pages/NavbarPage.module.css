@@ -6,12 +6,12 @@
     width: 100%;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
-    padding: 10px 20px;
+    padding: 0px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
-    height: 40px;
+    height: 60px;
     /* Ensuring same height */
 }
 
@@ -20,6 +20,7 @@
     list-style: none;
     display: flex;
     gap: 20px;
+    /* margin-left: -20px; */
 }
 
 .navLinks li {
@@ -29,7 +30,7 @@
 .navLinks a {
     text-decoration: none;
     color: white;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 300;
     padding: 8px 8px;
     border-radius: 5px;

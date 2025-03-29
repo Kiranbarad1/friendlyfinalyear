@@ -4,22 +4,44 @@ import Navbar from '@/components/Navbar';
 import CardComponent from '@/components/CardComponent';
 import SEO from '@/components/SEO';
 import "@/pages/projects/CategoryPage.css"; // Use CSS Modules for scoped styling
+
+
+
+
 export async function getServerSideProps({ params }) {
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/projects`, {
+            method: "GET",
+            headers: {
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        });
+
         if (!res.ok) throw new Error("Failed to fetch projects");
 
         const projects = await res.json();
+        // console.log("📨 All Projects Fetched:", projects);
+
         const formatCategory = (cat) => cat.toLowerCase().replace(/\s+/g, "-");
         const categoryLower = formatCategory(params.category);
+        // console.log("🔍 Category Parameter:", categoryLower);
 
-        const filteredProjects = projects.filter(proj => formatCategory(proj.category) === categoryLower);
+        // Check for category property in projects
+        const filteredProjects = projects.filter(proj =>
+            proj.category && formatCategory(proj.category) === categoryLower
+        );
+
+        // console.log("✅ Filtered Projects:", filteredProjects);
 
         return { props: { projects: filteredProjects, category: params.category } };
     } catch (error) {
+        // console.error("❌ Error fetching projects:", error);
         return { props: { projects: [], category: params.category } };
     }
 }
+
 
 
 

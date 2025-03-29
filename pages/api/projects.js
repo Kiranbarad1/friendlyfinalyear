@@ -2,19 +2,23 @@ import { connectToDatabase } from "../../lib/mongodb";
 import Project from "../../model/Project";
 
 export default async function handler(req, res) {
-    if (req.method === "GET") {
-        try {
-            await connectToDatabase();
-            const projects = await Project.find({});
-            res.status(200).json(projects);
-        } catch (error) {
-            console.error("Error fetching projects:", error);
-            res.status(500).json({ error: "Failed to fetch projects" });
-        }
-    } else {
-        res.status(405).json({ error: "Method Not Allowed" });
+    if (req.method !== "GET") {
+        return res.status(405).json({ error: "Method Not Allowed" });
+    }
+
+    try {
+        await connectToDatabase();
+        const projects = await Project.find({});
+
+        // Disable caching
+        res.setHeader("Cache-Control", "no-store, max-age=0");
+        res.status(200).json(projects);
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+        res.status(500).json({ error: "Failed to fetch projects" });
     }
 }
+
 
 
 
