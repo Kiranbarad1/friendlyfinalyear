@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 // import { useState } from "react";
 import Image from "next/image";
+import FloatingPopup from "@/components/FloatingPopup";
 
 export default function HomePage() {
     const featuredProjects = [
@@ -90,7 +91,7 @@ export default function HomePage() {
                     ))}
                 </div>
             </section>
-
+            <FloatingPopup />
             {/* Dark Themed Contact Section */}
             <motion.section
                 initial={{ opacity: 0 }}

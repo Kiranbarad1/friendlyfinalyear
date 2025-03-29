@@ -50,7 +50,7 @@ export default function SoftwareProjects() {
                         <h2>Category Select</h2>
                         <div className={styles.checkboxContainer}>
                             <ul>
-                                {["php", "python", "react", "java"].map((cat) => (
+                                {["php", "python", "node js", "react", "java"].map((cat) => (
                                     <li key={cat}>
                                         <label className={styles.checkboxLabel}>
                                             <input

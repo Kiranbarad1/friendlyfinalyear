@@ -1,9 +1,9 @@
 
 import { useMemo } from 'react';
-import Navbar from '@/components/Navbar';
 import CardComponent from '@/components/CardComponent';
 import SEO from '@/components/SEO';
 import "@/pages/projects/CategoryPage.css"; // Use CSS Modules for scoped styling
+import NavbarPage from '../NavbarPage';
 
 
 
@@ -55,7 +55,7 @@ export default function CategoryPage({ projects, category }) {
                 description={`Explore the best ${categoryTitle} projects for developers.`}
                 keywords={`${categoryTitle}, projects, development`}
             />
-            <Navbar />
+            <NavbarPage />
 
             <div className="container mx-auto px-6">
                 <h1 className="mt-[80px]">{categoryTitle} Projects</h1>
